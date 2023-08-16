@@ -1,0 +1,28 @@
+{
+    "name": "rnr1721/webcoder-test-task",
+    "description": "Test task for PHP Junior developer vacancy",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eugeny G",
+            "email": "rnr1721@gmail.com",
+            "homepage": "https://github.com/rnr1721",
+            "role": "Developer"
+        }
+    ],
+    "type": "project",
+    "support": {
+        "email": "rnr1721@gmail.com"
+    },
+    "homepage": "https://github.com/rnr1721",
+    "require": {},
+    "require-dev": {},
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core",
+            "App\\": "App"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

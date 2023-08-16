@@ -1,0 +1,35 @@
+<div class="form-group">
+    <label for="exampleInputUsername1">Имя пользователя</label>
+    <input required="" type="text" class="form-control" id="exampleInputUsername1" aria-describedby="usernameHelp" placeholder="Enter username" value="<?php echo $user['username'] ?? ''; ?>" name="username">
+    <small id="usernameHelp" class="form-text text-muted">Username</small>
+</div>
+<div class="form-group">
+    <label for="exampleInputEmail1">Email</label>
+    <input required="" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="<?php echo $user['email'] ?? ''; ?>" name="email">
+    <small id="emailHelp" class="form-text text-muted">Email</small>
+</div>
+<div class="form-group">
+    <label for="exampleInputPhone1">Phone</label>
+    <input required="" type="text" class="form-control" id="exampleInputPhone1" aria-describedby="emailHelp" placeholder="Enter phone" value="<?php echo $user['phone'] ?? ''; ?>" name="phone">
+    <small id="phoneHelp" class="form-text text-muted">Phone</small>
+</div>
+<div class="form-group">
+    <label for="exampleInputAddress1">Address</label>
+    <input required="" type="text" class="form-control" id="exampleInputAddress1" aria-describedby="addressHelp" placeholder="Enter address" value="<?php echo $user['address'] ?? ''; ?>" name="address">
+    <small id="addressHelp" class="form-text text-muted">Address</small>
+</div>
+<div class="form-group">
+    <label for="exampleInputComment1">Comment</label>
+    <input required="" type="text" class="form-control" id="exampleInputComment1" aria-describedby="commentHelp" placeholder="Enter comment" value="<?php echo $user['comment'] ?? ''; ?>" name="comment">
+    <small id="commentHelp" class="form-text text-muted">Comment</small>
+</div>
+<div class="form-group">
+    <label for="exampleInputDept1">Dept</label>
+    <select class="form-control form-control-lg" id="exampleInputDept1" name="dept_id">
+        <?php foreach ($depts as $dept): ?>
+            <option <?php echo ($dept['id'] === ($user['dept_id'] ?? 0) ? 'selected' : ''); ?> value="<?php echo $dept['id']; ?>"><?php echo $dept['name']; ?></option>
+        <?php endforeach; ?>
+    </select>
+    <small id="deptHelp" class="form-text text-muted">Department</small>
+</div>
+<input type="submit" class="btn btn-primary" value="Сохранить">

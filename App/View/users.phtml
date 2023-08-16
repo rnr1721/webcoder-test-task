@@ -3,10 +3,20 @@
 
     <div class="row mt-2">
         <div class="col-12">
+            <h1>Пользователи</h1>
+        </div>
+        <div class="col-6">
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group mr-2" role="group" aria-label="First group">
                     <a href="/" class="btn btn-primary" href=""><i class="fa-sharp fa-solid fa-home"></i></a>
                     <a href="/user/new" class="btn btn-primary" href=""><i class="fa-sharp fa-solid fa-plus"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <a href="/depts" class="btn btn-primary" href="">Отделы</a>
                 </div>
             </div>
         </div>
@@ -26,16 +36,16 @@
                 </tr>
                 <?php foreach ($users as $user): ?>
                     <tr>
-                        <th><?php echo $user['username']; ?></th>
-                        <th><?php echo $user['deptname']; ?></th>
-                        <th><?php echo $user['email']; ?></th>
-                        <th><?php echo $user['address']; ?></th>
-                        <th><?php echo $user['phone']; ?></th>
-                        <th><?php echo $user['comment']; ?></th>
-                        <th>
+                        <td><?php echo $user['username']; ?></td>
+                        <td><?php echo $user['deptname']; ?></td>
+                        <td><?php echo $user['email']; ?></td>
+                        <td><?php echo $user['address']; ?></td>
+                        <td><?php echo $user['phone']; ?></td>
+                        <td><?php echo $user['comment']; ?></td>
+                        <td>
                             <a href="/users/<?php echo $user['id']; ?>" class="btn btn-primary" href=""><i class="fa-solid fa-pen-to-square"></i></i></a>
                             <a href="/user/delete/<?php echo $user['id']; ?>" class="btn btn-primary" href=""><i class="fa-sharp fa-solid fa-trash"></i></i></a>                
-                        </th>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </table>

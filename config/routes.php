@@ -7,6 +7,9 @@ use App\Controller\Users;
 use App\Controller\UserDelete;
 use App\Controller\UserCreate;
 use App\Controller\UserUpdate;
+use App\Controller\DeptUpdate;
+use App\Controller\DeptCreate;
+use App\Controller\DeptDelete;
 use App\Controller\Depts;
 use App\Controller\Dept;
 use App\Controller\User;
@@ -48,11 +51,26 @@ return [
             new UserRepository($dbFactory->getDatabase())
             );
         },
+        '/dept/new' => function () use ($responseFactory, $dbFactory) {
+            return new DeptCreate(
+            $responseFactory->getView(),
+            new DeptRepository($dbFactory->getDatabase())
+            );
+        },
+        '/dept/delete/{deptId}' => function () use ($responseFactory, $dbFactory) {
+            return new DeptDelete(
+            $responseFactory->getResponse(),
+            new DeptRepository($dbFactory->getDatabase())
+            );
+        },
         '/depts/{deptId}' => function () use ($responseFactory) {
             return new Dept($responseFactory->getView());
         },
-        '/depts' => function () use ($responseFactory) {
-            return new Depts($responseFactory->getView());
+        '/depts' => function () use ($responseFactory, $dbFactory) {
+            return new Depts(
+            $responseFactory->getView(),
+            new DeptRepository($dbFactory->getDatabase())
+            );
         },
         'notfound' => function () use ($responseFactory) {
             return new NotfoundController($responseFactory->getView());
@@ -70,6 +88,14 @@ return [
         '/users/create' => function () use ($responseFactory, $dbFactory) {
             global $request;
             return new UserUpdate(
+            $request,
+            $responseFactory->getResponse(),
+            $dbFactory->getDatabase()
+            );
+        },
+        '/depts/create' => function () use ($responseFactory, $dbFactory) {
+            global $request;
+            return new DeptUpdate(
             $request,
             $responseFactory->getResponse(),
             $dbFactory->getDatabase()

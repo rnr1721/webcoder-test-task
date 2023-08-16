@@ -1,0 +1,43 @@
+<?php include 'header.phtml'; ?>
+<div class="container">
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <h1>Отделы</h1>
+        </div>
+        <div class="col-6">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <a href="/dept/new" class="btn btn-primary" href=""><i class="fa-sharp fa-solid fa-plus"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <a href="/users" class="btn btn-primary" href="">Пользователи</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <table class="table">
+                <tr>
+                    <th>Название отдела</th>
+                </tr>
+                <?php foreach ($depts as $dept): ?>
+                    <tr>
+                        <td><?php echo $dept['name']; ?></td>
+                        <td>
+                            <a href="/dept/delete/<?php echo $dept['id']; ?>" class="btn btn-primary" href=""><i class="fa-sharp fa-solid fa-trash"></i></i></a>                
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    </div>
+</div>
+<?php
+include 'footer.phtml';

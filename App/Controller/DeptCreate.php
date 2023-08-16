@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
-use Core\Contracts\Controller;
 use Core\Contracts\ViewInterface;
+use Core\Contracts\Controller;
 use Core\Contracts\ResponseInterface;
 use App\Model\DeptRepository;
 
-class Depts implements Controller
+class DeptCreate implements Controller
 {
 
     private ViewInterface $view;
@@ -21,9 +21,16 @@ class Depts implements Controller
 
     public function run(array $parameters = []): ResponseInterface
     {
-        
+
         $depts = $this->depts->getAll();
-        
-        return $this->view->render('depts.phtml',['title'=>'Отделы','depts' => $depts]);
+
+        return $this->view->render(
+                        'dept_create.phtml',
+                        [
+                            'title' => 'Отдел',
+                            'user' => [],
+                            'depts' => $depts
+                        ]
+        );
     }
 }

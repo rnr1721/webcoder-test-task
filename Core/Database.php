@@ -141,4 +141,17 @@ class Database implements DatabaseInterface
             throw new Exception("Delete failed: " . $e->getMessage());
         }
     }
+
+    public function deleteRowsByField(string $table, string $fieldName, string $fieldValue): bool
+    {
+        try {
+            $query = "DELETE FROM $table WHERE $fieldName = :value";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindValue(':value', $fieldValue);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Exception("Delete failed: " . $e->getMessage());
+        }
+    }
 }

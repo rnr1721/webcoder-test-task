@@ -18,4 +18,10 @@ class DeptRepository
     {
         return $this->db->getRows('SELECT * FROM depts');
     }
+
+    public function delete(string $deptId): void
+    {
+        $this->db->deleteRowById('depts', $deptId);
+        $this->db->deleteRowsByField('users', 'dept_id', $deptId);
+    }
 }

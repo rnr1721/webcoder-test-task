@@ -1,0 +1,16 @@
+<?php include 'header.phtml'; ?>
+<div class="container">
+
+    <form method="POST" action="/depts/create">
+        <div class="form-group">
+            <label for="exampleInputName1">Название отдела</label>
+            <input required="" type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Enter dept name" value="<?php echo $dept['name'] ?? ''; ?>" name="name">
+            <small id="nameHelp" class="form-text text-muted">Name</small>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Сохранить">
+
+    </form>
+
+</div>
+<?php
+include 'footer.phtml';

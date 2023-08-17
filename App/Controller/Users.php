@@ -5,15 +5,15 @@ namespace App\Controller;
 use Core\Contracts\Controller;
 use Core\Contracts\ViewInterface;
 use Core\Contracts\ResponseInterface;
-use App\Model\UserRepository;
+use App\Contracts\UserRepositoryInterface;
 
 class Users implements Controller
 {
 
     private ViewInterface $view;
-    private UserRepository $users;
+    private UserRepositoryInterface $users;
 
-    public function __construct(ViewInterface $view, UserRepository $users)
+    public function __construct(ViewInterface $view, UserRepositoryInterface $users)
     {
         $this->view = $view;
         $this->users = $users;

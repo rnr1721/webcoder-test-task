@@ -4,15 +4,15 @@ namespace App\Controller;
 
 use Core\Contracts\Controller;
 use Core\Contracts\ResponseInterface;
-use App\Model\DeptRepository;
+use App\Contracts\DeptRepositoryInterface;
 
 class DeptDelete implements Controller
 {
 
     private ResponseInterface $response;
-    private DeptRepository $depts;
+    private DeptRepositoryInterface $depts;
 
-    public function __construct(ResponseInterface $response, DeptRepository $depts)
+    public function __construct(ResponseInterface $response, DeptRepositoryInterface $depts)
     {
         $this->response = $response;
         $this->depts = $depts;

@@ -5,15 +5,15 @@ namespace App\Controller;
 use Core\Contracts\Controller;
 use Core\Contracts\ViewInterface;
 use Core\Contracts\ResponseInterface;
-use App\Model\DeptRepository;
+use App\Contracts\DeptRepositoryInterface;
 
 class Depts implements Controller
 {
 
     private ViewInterface $view;
-    private DeptRepository $depts;
+    private DeptRepositoryInterface $depts;
 
-    public function __construct(ViewInterface $view, DeptRepository $depts)
+    public function __construct(ViewInterface $view, DeptRepositoryInterface $depts)
     {
         $this->view = $view;
         $this->depts = $depts;

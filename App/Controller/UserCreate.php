@@ -5,17 +5,17 @@ namespace App\Controller;
 use Core\Contracts\ViewInterface;
 use Core\Contracts\Controller;
 use Core\Contracts\ResponseInterface;
-use App\Model\UserRepository;
-use App\Model\DeptRepository;
+use App\Contracts\UserRepositoryInterface;
+use App\Contracts\DeptRepositoryInterface;
 
 class UserCreate implements Controller
 {
 
     private ViewInterface $view;
-    private UserRepository $users;
-    private DeptRepository $depts;
+    private UserRepositoryInterface $users;
+    private DeptRepositoryInterface $depts;
 
-    public function __construct(ViewInterface $view, UserRepository $users, DeptRepository $depts)
+    public function __construct(ViewInterface $view, UserRepositoryInterface $users, DeptRepositoryInterface $depts)
     {
         $this->view = $view;
         $this->users = $users;

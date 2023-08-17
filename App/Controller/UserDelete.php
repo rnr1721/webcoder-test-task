@@ -4,15 +4,15 @@ namespace App\Controller;
 
 use Core\Contracts\Controller;
 use Core\Contracts\ResponseInterface;
-use App\Model\UserRepository;
+use App\Contracts\UserRepositoryInterface;
 
 class UserDelete implements Controller
 {
 
     private ResponseInterface $response;
-    private UserRepository $users;
+    private UserRepositoryInterface $users;
 
-    public function __construct(ResponseInterface $response, UserRepository $users)
+    public function __construct(ResponseInterface $response, UserRepositoryInterface $users)
     {
         $this->response = $response;
         $this->users = $users;

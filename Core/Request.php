@@ -4,16 +4,19 @@ namespace Core;
 
 use Core\Contracts\RequestInterface;
 
+/**
+ * This class for get data from _SERVER and _POST arrays
+ */
 class Request implements RequestInterface
 {
 
     private array $post;
     private array $server;
 
-    public function __construct()
+    public function __construct(array $server = [], array $post = [])
     {
-        $this->server = $_SERVER;
-        $this->post = $_POST;
+        $this->server = (empty($server) ? $_SERVER : $server);
+        $this->post = (empty($post) ? $_POST : $post);
     }
 
     /**

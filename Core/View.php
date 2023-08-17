@@ -6,10 +6,24 @@ use Core\Contracts\ViewInterface;
 use Core\Contracts\ResponseInterface;
 use InvalidArgumentException;
 
+/**
+ * Simple PHP template engine
+ */
 class View implements ViewInterface
 {
 
+    /**
+     * Directory with templates
+     * 
+     * @var string
+     */
     private string $templateDir;
+
+    /**
+     * System response object
+     * 
+     * @var ResponseInterface
+     */
     private ResponseInterface $response;
 
     public function __construct(string $templateDir, ResponseInterface $response)
@@ -18,6 +32,10 @@ class View implements ViewInterface
         $this->response = $response;
     }
 
+    /**
+     * @inheritDoc
+     * @throws InvalidArgumentException
+     */
     public function render(
             string $template,
             array $data = [],
@@ -31,16 +49,22 @@ class View implements ViewInterface
         }
 
         ob_start();
+        // Extract template data to use as variables in templates
         extract($data, EXTR_SKIP);
         include $templatePath;
+        // Get template as string
         $result = ob_get_clean();
 
+        // Set up response object data
         $this->response->setResponseCode($responseCode);
         $this->response->setBody($result);
         $this->response->setHeaders($headers);
         return $this->response;
     }
-    
+
+    /**
+     * @inheritDoc
+     */
     public function getResponse(): ResponseInterface
     {
         return $this->response;

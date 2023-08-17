@@ -2,6 +2,9 @@
 
 namespace Core\Contracts;
 
+/**
+ * This interface return data from SERVER array and any request data
+ */
 interface RequestInterface
 {
 

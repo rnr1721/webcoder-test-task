@@ -2,13 +2,17 @@
 
 namespace Core\Contracts;
 
+/**
+ * Database operations interface.
+ * Implementations must create base CRUD DB operations
+ */
 interface DatabaseInterface
 {
 
     /**
      * Simple SELECT query
      * 
-     * @param string $query
+     * @param string $query SQL query
      * @return array
      */
     public function getRows(string $query): array;
@@ -16,21 +20,21 @@ interface DatabaseInterface
     /**
      * Get one ow by any field
      * 
-     * @param int $userId
+     * @param int $idValue ID value
      * @param string $table
-     * @param string $by
+     * @param string $by Field for query
      * @return array|null
      */
-    public function getRowBy(int $userId, string $table, string $by = 'id'): array|null;
+    public function getRowBy(int $idValue, string $table, string $by = 'id'): array|null;
 
     /**
-     * Get row by ID
+     * Get one row by ID
      * 
-     * @param int $userId
+     * @param int $id
      * @param string $table
      * @return array|null
      */
-    public function getRowById(int $userId, string $table): array|null;
+    public function getRowById(int $id, string $table): array|null;
 
     /**
      * Insert specyfic fields from array as record

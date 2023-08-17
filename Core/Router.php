@@ -5,10 +5,24 @@ namespace Core;
 use Core\Contracts\RouterInterface;
 use Core\Contracts\RequestInterface;
 
+/**
+ * Class for routing. It check route for matches and if match,
+ * it return route data with controller instance
+ */
 class Router implements RouterInterface
 {
 
+    /**
+     * System request object
+     * 
+     * @var RequestInterface
+     */
     private RequestInterface $request;
+
+    /**
+     * Routes array
+     * @var array
+     */
     private array $routes;
 
     public function __construct(array $routes, RequestInterface $request)
@@ -17,6 +31,9 @@ class Router implements RouterInterface
         $this->routes = $routes;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function route(?string $method = null, ?string $uri = null): array
     {
 
@@ -31,7 +48,7 @@ class Router implements RouterInterface
         $routes = $this->routes[$method] ?? [];
 
         $matches = [];
-        
+
         foreach ($routes as $route => $controller) {
             $pattern = $this->buildPattern($route);
 
@@ -53,11 +70,20 @@ class Router implements RouterInterface
         ];
     }
 
-    public function getRoutes() : array
+    /**
+     * @inheritDoc
+     */
+    public function getRoutes(): array
     {
         return $this->routes;
     }
 
+    /**
+     * Build pattern from route
+     * 
+     * @param string $route
+     * @return string
+     */
     private function buildPattern(string $route): string
     {
         // We using [^/]+ for capture any symbols before slash
@@ -65,6 +91,12 @@ class Router implements RouterInterface
         return '/^' . str_replace('/', '\/', $pattern) . '$/';
     }
 
+    /**
+     * Extracts parameters from matches array
+     * 
+     * @param array $matches
+     * @return array
+     */
     private function extractParameters(array $matches): array
     {
         $parameters = [];

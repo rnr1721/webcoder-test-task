@@ -6,9 +6,18 @@ use Core\Contracts\DatabaseInterface;
 use Exception;
 use PDO;
 
+/**
+ * Class for Database operations
+ * It can connect to DB and base CRUD operations
+ */
 class Database implements DatabaseInterface
 {
 
+    /**
+     * PHP Data Object (PDO)
+     * 
+     * @var PDO
+     */
     private PDO $pdo;
 
     public function __construct(array $c)
@@ -27,6 +36,9 @@ class Database implements DatabaseInterface
         }
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getRows(string $query): array
     {
         try {
@@ -42,19 +54,26 @@ class Database implements DatabaseInterface
         }
     }
 
-    public function getRowBy(int $userId, string $table, string $by = 'id'): array|null
+    /**
+     * @inheritdoc
+     */
+    public function getRowBy(
+            int $idValue,
+            string $table,
+            string $by = 'id'
+    ): array|null
     {
         try {
 
             $query = "SELECT * FROM $table WHERE $by = :id";
             $stmt = $this->pdo->prepare($query);
-            $stmt->bindParam(':' . $by, $userId, PDO::PARAM_INT);
+            $stmt->bindParam(':' . $by, $idValue, PDO::PARAM_INT);
             $stmt->execute();
 
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($user) {
-                return $user;
+            if ($row) {
+                return $row;
             } else {
                 return null;
             }
@@ -63,11 +82,17 @@ class Database implements DatabaseInterface
         }
     }
 
-    public function getRowById(int $userId, string $table): array|null
+    /**
+     * @inheritdoc
+     */
+    public function getRowById(int $id, string $table): array|null
     {
-        return $this->getRowBy($userId, $table, 'id');
+        return $this->getRowBy($id, $table, 'id');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function insertRow(string $table, array $data, array $fields): bool
     {
         try {
@@ -96,7 +121,15 @@ class Database implements DatabaseInterface
         }
     }
 
-    public function updateRow(string $table, array $data, array $fields, int $id): bool
+    /**
+     * @inheritdoc
+     */
+    public function updateRow(
+            string $table,
+            array $data,
+            array $fields,
+            int $id
+    ): bool
     {
 
         try {
@@ -129,6 +162,9 @@ class Database implements DatabaseInterface
         }
     }
 
+    /**
+     * @inheritdoc
+     */
     public function deleteRowById(string $table, int $id): bool
     {
         try {
@@ -142,7 +178,14 @@ class Database implements DatabaseInterface
         }
     }
 
-    public function deleteRowsByField(string $table, string $fieldName, string $fieldValue): bool
+    /**
+     * @inheritdoc
+     */
+    public function deleteRowsByField(
+            string $table,
+            string $fieldName,
+            string $fieldValue
+    ): bool
     {
         try {
             $query = "DELETE FROM $table WHERE $fieldName = :value";

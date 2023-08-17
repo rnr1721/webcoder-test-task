@@ -5,40 +5,27 @@ namespace App\Controller;
 use Core\Contracts\Controller;
 use Core\Contracts\RequestInterface;
 use Core\Contracts\ResponseInterface;
-use Core\Contracts\DatabaseInterface;
+use App\Contracts\UserRepositoryInterface;
 
 class UserUpdate implements Controller
 {
 
     private RequestInterface $request;
     private ResponseInterface $response;
-    private DatabaseInterface $db;
+    private UserRepositoryInterface $users;
 
-    public function __construct(RequestInterface $request, ResponseInterface $response, DatabaseInterface $db)
+    public function __construct(RequestInterface $request, ResponseInterface $response, UserRepositoryInterface $users)
     {
         $this->request = $request;
         $this->response = $response;
-        $this->db = $db;
+        $this->users = $users;
     }
 
     public function run(array $parameters = []): ResponseInterface
     {
         $data = $this->request->getPostData();
 
-        if (isset($data['id'])) {
-            $result = $this->db->updateRow(
-                    'users',
-                    $data,
-                    ['dept_id', 'email', 'username', 'address', 'phone', 'comment'],
-                    $data['id']
-            );
-        } else {
-            $result = $this->db->insertRow(
-                    'users',
-                    $data,
-                    ['dept_id', 'email', 'username', 'address', 'phone', 'comment']
-            );
-        }
+        $result = $this->users->update($data);
 
         if ($result) {
             $this->response->redirect('/users');

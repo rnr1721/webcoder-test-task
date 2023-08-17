@@ -3,8 +3,9 @@
 namespace App\Model;
 
 use Core\Contracts\DatabaseInterface;
+use App\Contracts\UserRepositoryInterface;
 
-class UserRepository
+class UserRepository implements UserRepositoryInterface
 {
 
     private DatabaseInterface $db;
@@ -27,5 +28,24 @@ class UserRepository
     public function delete(string $userId): void
     {
         $this->db->deleteRowById('users', intval($userId));
+    }
+
+    public function update(array $data): bool
+    {
+        if (isset($data['id'])) {
+            $result = $this->db->updateRow(
+                    'users',
+                    $data,
+                    ['dept_id', 'email', 'username', 'address', 'phone', 'comment'],
+                    $data['id']
+            );
+        } else {
+            $result = $this->db->insertRow(
+                    'users',
+                    $data,
+                    ['dept_id', 'email', 'username', 'address', 'phone', 'comment']
+            );
+        }
+        return $result;
     }
 }

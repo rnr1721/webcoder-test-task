@@ -82,7 +82,7 @@ return [
             return new UserUpdate(
             $request,
             $responseFactory->getResponse(),
-            $dbFactory->getDatabase()
+            new UserRepository($dbFactory->getDatabase())
             );
         },
         '/users/create' => function () use ($responseFactory, $dbFactory) {
@@ -90,7 +90,7 @@ return [
             return new UserUpdate(
             $request,
             $responseFactory->getResponse(),
-            $dbFactory->getDatabase()
+            new UserRepository($dbFactory->getDatabase())
             );
         },
         '/depts/create' => function () use ($responseFactory, $dbFactory) {
@@ -98,7 +98,7 @@ return [
             return new DeptUpdate(
             $request,
             $responseFactory->getResponse(),
-            $dbFactory->getDatabase()
+            new DeptRepository($dbFactory->getDatabase())
             );
         },
     ]
